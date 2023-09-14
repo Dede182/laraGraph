@@ -15,7 +15,7 @@ Implmenting smaple laravel-graphQl project
 
 Register
 
-```bash
+```graphQl
 mutation{
   register(input:{
     name:"hi",
