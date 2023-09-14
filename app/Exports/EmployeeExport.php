@@ -34,7 +34,7 @@ class EmployeeExport implements FromView,WithColumnWidths
     {
         $columns = $this->getHeaders();
         return view('exports.employees.list',[
-            'employees' => $this->query()->limit(10)->get(),
+            'employees' => $this->query()->get(),
             'columns' => $columns
         ]);
     }
