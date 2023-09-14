@@ -1,0 +1,44 @@
+
+
+type Query {
+
+    employee(
+        id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
+    ): Employee @find @guard
+
+    employees: [Employee!]! @paginate(defaultCount: 10) @guard
+}
+
+enum SuccessStatus {
+    SUCCESS
+}
+
+type EmployeeCreatedResponse  @model(class: "\\App\\Models\\Employee"){
+    status: SuccessStatus!
+    employee: Employee!
+}
+
+input createEmployeeInput {
+    first_name: String! @rules(apply: ["required"])
+    last_name: String! @rules(apply: ["required"])
+    email: String! @rules(apply: ["required", "email"])
+    phone: String! @rules(apply: ["required"])
+    department: String! @rules(apply: ["required"])
+}
+
+input updateEmployeeInput {
+    id: ID! @rules(apply: ["required","exists:employees,id"])
+    first_name: String @rules(apply: ["required"])
+    last_name: String @rules(apply: ["required"])
+    email: String  @rules(apply: ["required", "email"])
+    phone: String @rules(apply: ["required"])
+    department: String @rules(apply: ["required"])
+}
+
+extend type Mutation {
+    createEmployee(input: createEmployeeInput! @spread): EmployeeCreatedResponse! @guard  @field(resolver: "\\App\\GraphQL\\Mutations\\Employee\\Create@create")
+    updateEmployee(input: updateEmployeeInput! @spread): EmployeeCreatedResponse! @guard @can(ability:"update",find:"id") @field(resolver: "\\App\\GraphQL\\Mutations\\Employee\\Update@update")
+    deleteEmployee(id: ID! @whereKey): Employee!  @delete @guard @can(ability:"delete",find:"id")
+}
+
+
