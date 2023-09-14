@@ -11,7 +11,7 @@ Implmenting smaple laravel-graphQl project
 - unit tested
 
 
-## Project Quick Stroke Quries
+## Project Quick Stroke Queries
 
 Register
 
