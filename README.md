@@ -35,7 +35,7 @@ mutation{
 ```
 
 Login
-```bash
+```graphQl
   mutation{
     login(input:{
         username:"yourEmail.com",
@@ -51,7 +51,7 @@ Login
 
 Fetch the list of employees
 
-```bash
+```graphQl
 query{
   employees(page: 1) {
     data {
@@ -67,7 +67,7 @@ query{
 ```
 
 By Id 
-```bash
+```graphQl
 query{
   employee(id: 6) {
     first_name
@@ -82,7 +82,7 @@ query{
 ```
 
 Create Employee
-```bash
+```graphQl
 mutation {
   createEmployee(
     input: {first_name: "Jhon", 
@@ -103,7 +103,7 @@ mutation {
 ```
 Update Employee
 
-```bash
+```graphQl
 mutation {
   updateEmployee(
     input: {id: 10001, first_name: "htet", last_name: "shine", phone: "09123412412", email: "hsh@dgmail.com", department: "IT"}
@@ -121,7 +121,7 @@ mutation {
 
 Delete Employee
 
-```bash
+```graphQl
 mutation{
   deleteEmployee(id: 10001) {
     id
